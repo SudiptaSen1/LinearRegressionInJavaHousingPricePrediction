@@ -1,5 +1,7 @@
 import java.util.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class LinearRegression{
 
@@ -156,12 +158,17 @@ public class LinearRegression{
         return values.stream().mapToDouble(Double::doubleValue).toArray();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        String filepath = "C:\\Users\\sensu\\OneDrive\\Desktop\\codingdesktop\\java\\Linear Regression\\HousePricePrediction.csv";
+        String filePath = "secret.txt"; // File name
 
-        double[] X = readCSVColumn(filepath, "LotArea");
-        double[] Y = readCSVColumn(filepath, "SalePrice");
+        
+        String content = new String(Files.readAllBytes(Paths.get(filePath))); // Read file into String
+        System.out.println("File Content:\n" + content); // Print content
+        
+
+        double[] X = readCSVColumn(content, "LotArea");
+        double[] Y = readCSVColumn(content, "SalePrice");
 
         System.out.println(Arrays.toString(X));
         System.out.println(Arrays.toString(Y));
